@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todos_app/common/styles/color_palettes.dart';
 import 'package:flutter_todos_app/di/injection_container.dart';
 import 'package:flutter_todos_app/screens/home_page.dart';
 import 'package:flutter_todos_app/services/shared_preferences_service.dart';
@@ -43,11 +44,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
               },
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  color: index % 2 == 0 ? Colors.blue : Colors.green,
+                  color:
+                      index % 2 == 0 ? ColorPalettes.blue : ColorPalettes.green,
                   child: Center(
                     child: Text(
                       'Page ${index + 1}',
-                      style: const TextStyle(fontSize: 24, color: Colors.white),
+                      style: const TextStyle(
+                        fontSize: 24,
+                        color: ColorPalettes.white,
+                      ),
                     ),
                   ),
                 );
@@ -96,7 +101,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   child: const Text(
                     'Skip',
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: ColorPalettes.blue,
                     ),
                   ),
                 ),
