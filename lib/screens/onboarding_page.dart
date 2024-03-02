@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todos_app/common/styles/color_palettes.dart';
 import 'package:flutter_todos_app/di/injection_container.dart';
-import 'package:flutter_todos_app/screens/home_page.dart';
+import 'package:flutter_todos_app/screens/login_page.dart';
 import 'package:flutter_todos_app/services/shared_preferences_service.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -24,7 +24,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     _sharedPreferencesService.setOnboardingViewed(true);
     Navigator.pushReplacementNamed(
       context,
-      HomePage.routeName,
+      LoginPage.routeName,
     );
   }
 
