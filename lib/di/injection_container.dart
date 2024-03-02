@@ -12,6 +12,7 @@ final getIt = GetIt.instance;
 Future<void> init(String baseUrl) async {
   // Cubit
   getIt.registerFactory(() => AuthCubit(getIt()));
+  getIt.registerFactory(() => TodosCubit(getIt()));
 
   // Local
   final preferences = await SharedPreferences.getInstance();
@@ -27,4 +28,5 @@ Future<void> init(String baseUrl) async {
   getIt.registerLazySingleton(() => dioClient);
   getIt.registerLazySingleton(() => dioClient.dio);
   getIt.registerLazySingleton(() => AuthService(getIt()));
+  getIt.registerLazySingleton(() => TodoService(getIt()));
 }

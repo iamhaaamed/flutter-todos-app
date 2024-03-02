@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_todos_app/cubit/auth/auth_cubit.dart';
+import 'package:flutter_todos_app/cubit/todo/todo_cubit.dart';
 import 'package:flutter_todos_app/di/injection_container.dart';
 import 'package:flutter_todos_app/screens/home_page.dart';
 import 'package:flutter_todos_app/screens/login_page.dart';
@@ -37,6 +38,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<AuthCubit>(),
         ),
+        BlocProvider(
+          create: (context) => getIt<TodosCubit>(),
+        )
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
