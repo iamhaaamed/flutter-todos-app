@@ -1,45 +1,16 @@
-class Todo {
-  final int id;
-  final String title;
-  final String description;
-  final bool isChecked;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  Todo({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.isChecked,
-  });
+part 'todo.freezed.dart';
+part 'todo.g.dart';
 
-  Todo copyWith({
-    int? id,
-    String? title,
-    String? description,
-    bool? isChecked,
-  }) {
-    return Todo(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      description: description ?? this.description,
-      isChecked: isChecked ?? this.isChecked,
-    );
-  }
+@freezed
+class Todo with _$Todo {
+  const factory Todo({
+    required int id,
+    required String title,
+    required String description,
+    @Default(false) bool isChecked,
+  }) = _Todo;
 
-  factory Todo.fromJson(Map<String, dynamic> json) {
-    return Todo(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      isChecked: json['isChecked'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'description': description,
-      'isChecked': isChecked,
-    };
-  }
+  factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
 }
