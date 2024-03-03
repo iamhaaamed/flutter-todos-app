@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todos_app/constants/app_sizes.dart';
 import 'package:flutter_todos_app/cubit/auth/auth_cubit.dart';
 import 'package:flutter_todos_app/cubit/auth/auth_state.dart';
 import 'package:flutter_todos_app/screens/home_page.dart';
@@ -33,7 +34,7 @@ class LoginPage extends StatelessWidget {
         },
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(Sizes.p16),
             child: Form(
               key: formKey,
               child: Column(
@@ -51,7 +52,7 @@ class LoginPage extends StatelessWidget {
                       labelText: 'Username',
                     ),
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: Sizes.p16),
                   TextFormField(
                     controller: passwordController,
                     validator: (value) {
@@ -68,7 +69,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     obscureText: true,
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: Sizes.p16),
                   ElevatedButton(
                     onPressed: () {
                       if (!formKey.currentState!.validate()) {

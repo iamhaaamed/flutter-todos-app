@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todos_app/common/styles/color_palettes.dart';
+import 'package:flutter_todos_app/constants/app_sizes.dart';
 import 'package:flutter_todos_app/di/injection_container.dart';
 import 'package:flutter_todos_app/screens/login_page.dart';
 import 'package:flutter_todos_app/services/shared_preferences_service.dart';
@@ -59,7 +60,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               },
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: Sizes.p20),
           SmoothPageIndicator(
             controller: _controller,
             count: _numPages,
@@ -72,7 +73,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 // expansionFactor: 2,
                 ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: Sizes.p20),
           ElevatedButton(
             onPressed: () {
               // Go to the next page
@@ -105,11 +106,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 20),
+                const SizedBox(width: Sizes.p20),
               ],
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: Sizes.p32),
         ],
       ),
     );
