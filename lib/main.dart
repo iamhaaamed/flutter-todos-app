@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_todos_app/cubit/auth/auth_cubit.dart';
+import 'package:flutter_todos_app/cubit/auth/auth_state.dart';
 import 'package:flutter_todos_app/cubit/todo/todo_cubit.dart';
 import 'package:flutter_todos_app/di/injection_container.dart';
+import 'package:flutter_todos_app/di/injection_container.dart' as di;
 import 'package:flutter_todos_app/screens/home_page.dart';
 import 'package:flutter_todos_app/screens/login_page.dart';
 import 'package:flutter_todos_app/screens/onboarding_page.dart';
-import 'package:flutter_todos_app/di/injection_container.dart' as di;
+import 'package:flutter_todos_app/screens/profile_page.dart';
 import 'package:flutter_todos_app/services/shared_preferences_service.dart';
 
 void main() async {
@@ -30,7 +32,6 @@ class MyApp extends StatelessWidget {
 
   const MyApp({super.key, required this.onboardingViewed});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -46,30 +47,68 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // TRY THIS: Try running your application with "flutter run". You'll see
-          // the application has a purple toolbar. Then, without quitting the app,
-          // try changing the seedColor in the colorScheme below to Colors.green
-          // and then invoke "hot reload" (save your changes or press the "hot
-          // reload" button in a Flutter-supported IDE, or press "r" if you used
-          // the command line to start the app).
-          //
-          // Notice that the counter didn't reset back to zero; the application
-          // state is not lost during the reload. To reset the state, use hot
-          // restart instead.
-          //
-          // This works for code too, not just values: Most code changes can be
-          // tested with just a hot reload.
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: onboardingViewed ? const LoginPage() : const OnboardingPage(),
+        home: BlocBuilder<AuthCubit, AuthState>(
+          builder: (context, state) {
+            // if (state is AuthState ) {
+            //   return const MyAppWithBottomNavigationBar();
+            // } else {
+            //   return const OnboardingPage();
+            // }
+            return const MyAppWithBottomNavigationBar();
+          },
+        ),
         routes: {
           '/onboarding': (context) => const OnboardingPage(),
           '/login': (context) => const LoginPage(),
           '/home': (context) => const HomePage(),
         },
+      ),
+    );
+  }
+}
+
+class MyAppWithBottomNavigationBar extends StatefulWidget {
+  const MyAppWithBottomNavigationBar({super.key});
+
+  @override
+  _MyAppWithBottomNavigationBarState createState() =>
+      _MyAppWithBottomNavigationBarState();
+}
+
+class _MyAppWithBottomNavigationBarState
+    extends State<MyAppWithBottomNavigationBar> {
+  int _currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: IndexedStack(
+        index: _currentIndex,
+        children: const [
+          HomePage(),
+          ProfilePage(),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }
