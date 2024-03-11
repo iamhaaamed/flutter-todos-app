@@ -10,6 +10,7 @@ import 'package:flutter_todos_app/screens/home_page.dart';
 import 'package:flutter_todos_app/screens/login_page.dart';
 import 'package:flutter_todos_app/screens/onboarding_page.dart';
 import 'package:flutter_todos_app/screens/profile_page.dart';
+import 'package:flutter_todos_app/screens/todo_details_page.dart';
 import 'package:flutter_todos_app/services/shared_preferences_service.dart';
 
 void main() async {
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
           '/onboarding': (context) => const OnboardingPage(),
           '/login': (context) => const LoginPage(),
           '/home': (context) => const HomePage(),
+          '/todoDetails': (context) => const TodoDetailsPage(),
         },
       ),
     );

@@ -4,6 +4,7 @@ import 'package:flutter_todos_app/cubit/todo/todo_cubit.dart';
 import 'package:flutter_todos_app/cubit/todo/todo_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos_app/models/todo.dart';
+import 'package:flutter_todos_app/screens/todo_details_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home';
@@ -54,6 +55,11 @@ class _HomePageState extends State<HomePage> {
                       // Dispatch event to remove todo from Cubit
                       context.read<TodosCubit>().deleteTodo(id: todo.id);
                     },
+                  ),
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    TodoDetailsPage.routeName,
+                    arguments: todo,
                   ),
                 );
               },
