@@ -1,23 +1,25 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_todos_app/common/model/delayed_result.dart';
 
-abstract class AuthState extends Equatable {
-  const AuthState();
+class AuthState extends Equatable {
+  final DelayedResult<void> loadingResult;
+  final bool isAuthenticated;
 
-  @override
-  List<Object?> get props => [];
-}
-
-class AuthInitial extends AuthState {}
-
-class AuthLoading extends AuthState {}
-
-class AuthSuccess extends AuthState {}
-
-class AuthFailure extends AuthState {
-  final String error;
-
-  const AuthFailure(this.error);
+  const AuthState({
+    this.loadingResult = const DelayedResult.idle(),
+    this.isAuthenticated = false,
+  });
 
   @override
-  List<Object?> get props => [error];
+  List<Object?> get props => [loadingResult, isAuthenticated];
+
+  AuthState copyWith({
+    DelayedResult<void>? loadingResult,
+    bool? isAuthenticated,
+  }) {
+    return AuthState(
+      loadingResult: loadingResult ?? this.loadingResult,
+      isAuthenticated: isAuthenticated ?? this.isAuthenticated,
+    );
+  }
 }

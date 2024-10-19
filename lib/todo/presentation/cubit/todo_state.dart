@@ -1,51 +1,26 @@
+import 'package:equatable/equatable.dart';
+import 'package:flutter_todos_app/common/model/delayed_result.dart';
 import 'package:flutter_todos_app/todo/domain/model/todo.dart';
 
-sealed class TodosState {}
+class TodosState extends Equatable {
+  final List<Todo> items;
+  final DelayedResult<void> loadingResult;
 
-final class TodosInitial extends TodosState {}
+  const TodosState({
+    this.loadingResult = const DelayedResult.idle(),
+    this.items = const [],
+  });
 
-final class TodosLoading extends TodosState {}
+  @override
+  List<Object?> get props => [items, loadingResult];
 
-final class TodosSuccess extends TodosState {
-  final List<Todo> todos;
-
-  TodosSuccess({required this.todos});
-}
-
-final class TodoFailure extends TodosState {
-  final Object error;
-  TodoFailure({required this.error});
-}
-
-final class AddTodoInitial extends TodosState {}
-
-final class AddTodoLoading extends TodosState {}
-
-final class AddTodoSuccess extends TodosState {}
-
-final class AddTodoFailure extends TodosState {
-  final Object error;
-  AddTodoFailure({required this.error});
-}
-
-final class DeleteTodoInitial extends TodosState {}
-
-final class DeleteTodoLoading extends TodosState {}
-
-final class DeleteTodoSuccess extends TodosState {}
-
-final class DeleteTodoFailure extends TodosState {
-  final Object error;
-  DeleteTodoFailure({required this.error});
-}
-
-final class ToggleTodoInitial extends TodosState {}
-
-final class ToggleTodoLoading extends TodosState {}
-
-final class ToggleTodoSuccess extends TodosState {}
-
-final class ToggleTodoFailure extends TodosState {
-  final Object error;
-  ToggleTodoFailure({required this.error});
+  TodosState copyWith({
+    List<Todo>? items,
+    DelayedResult<void>? loadingResult,
+  }) {
+    return TodosState(
+      items: items ?? this.items,
+      loadingResult: loadingResult ?? this.loadingResult,
+    );
+  }
 }

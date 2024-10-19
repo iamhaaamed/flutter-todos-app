@@ -2,30 +2,32 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todos_app/auth/presentation/cubit/auth_state.dart';
 import 'package:flutter_todos_app/auth/data/service/auth_service.dart';
+import 'package:flutter_todos_app/common/model/delayed_result.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final AuthService _authService;
 
-  AuthCubit(this._authService) : super(AuthInitial());
+  AuthCubit(this._authService) : super(const AuthState());
 
   Future<void> login(String username, String password) async {
-    // Emit AuthLoading state to indicate that authentication process has started
-    emit(AuthLoading());
+    emit(state.copyWith(loadingResult: const DelayedResult.inProgress()));
 
     try {
-      // Attempt to authenticate user
       bool success = await _authService.login(username, password);
 
       if (success) {
-        // If authentication is successful, emit AuthSuccess state
-        emit(AuthSuccess());
+        emit(state.copyWith(
+          isAuthenticated: true,
+          loadingResult: const DelayedResult.idle(),
+        ));
       } else {
-        // If authentication fails, emit AuthFailure state with error message
-        emit(const AuthFailure('Invalid username or password.'));
+        emit(state.copyWith(
+          loadingResult: DelayedResult.fromError(
+              Exception('Invalid username or password')),
+        ));
       }
-    } catch (e) {
-      // If an error occurs during authentication, emit AuthFailure state with error message
-      emit(AuthFailure('An error occurred: $e'));
+    } on Exception catch (ex) {
+      emit(state.copyWith(loadingResult: DelayedResult.fromError(ex)));
     }
   }
 }

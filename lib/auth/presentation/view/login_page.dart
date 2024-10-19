@@ -22,9 +22,9 @@ class LoginPage extends StatelessWidget {
       ),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-          if (state is AuthSuccess) {
+          if (state.isAuthenticated) {
             Navigator.pushReplacementNamed(context, HomePage.routeName);
-          } else if (state is AuthFailure) {
+          } else if (state.loadingResult.isError) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Invalid username or password.'),

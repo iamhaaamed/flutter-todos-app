@@ -31,22 +31,22 @@ class _HomePageState extends State<HomePage> {
       ),
       body: BlocBuilder<TodosCubit, TodosState>(
         builder: (context, state) {
-          if (state is TodosSuccess) {
+          if (state.loadingResult.isIdle) {
             return ListView.builder(
-              itemCount: state.todos.length,
+              itemCount: state.items.length,
               itemBuilder: (context, index) {
-                final todo = state.todos[index];
+                final todo = state.items[index];
                 return ListTile(
-                  title: Text(state.todos[index].title),
-                  subtitle: Text(state.todos[index].description),
+                  title: Text(state.items[index].title),
+                  subtitle: Text(state.items[index].description),
                   leading: Checkbox(
                     onChanged: (value) {
                       context.read<TodosCubit>().toggleTodo(
                             id: todo.id,
-                            isChecked: !state.todos[index].isChecked,
+                            isChecked: !state.items[index].isChecked,
                           );
                     },
-                    value: state.todos[index].isChecked,
+                    value: state.items[index].isChecked,
                   ),
                   trailing: IconButton(
                     icon: const Icon(Icons.delete),
@@ -64,9 +64,9 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             );
-          } else if (state is TodoFailure) {
+          } else if (state.loadingResult.isError) {
             return Text(
-              state.error.toString(),
+              state.loadingResult.error.toString(),
               style: const TextStyle(color: ColorPalettes.red),
             );
           } else {
@@ -164,7 +164,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               final todo = Todo(
-                id: '0',
+                id: '',
                 title: _titleController.text,
                 description: _descriptionController.text,
                 isChecked: _isChecked,

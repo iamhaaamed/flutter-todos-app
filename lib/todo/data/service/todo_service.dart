@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_todos_app/todo/domain/model/todo.dart';
 import 'package:flutter_todos_app/network/api/api_constants.dart';
+import 'package:flutter_todos_app/todo/domain/service/abstract_todo_service.dart';
 
-class TodoService {
+class TodoService extends AbstractTodoService {
   final Dio _dio;
 
   TodoService(this._dio);
 
+  @override
   Future<List<Todo>> getTodos() async {
     try {
       final response = await _dio.get('${ApiConstants.baseUrlDebug}/todos');
@@ -18,6 +20,7 @@ class TodoService {
     }
   }
 
+  @override
   Future<Todo> addTodo(Todo todo) async {
     try {
       final response = await _dio.post('${ApiConstants.baseUrlDebug}/todos',
@@ -30,6 +33,7 @@ class TodoService {
     }
   }
 
+  @override
   Future<void> updateTodo(Todo todo) async {
     try {
       await _dio.put('${ApiConstants.baseUrlDebug}/todos/${todo.id}',
@@ -39,6 +43,7 @@ class TodoService {
     }
   }
 
+  @override
   Future<void> deleteTodo(String id) async {
     try {
       await _dio.delete('${ApiConstants.baseUrlDebug}/todos/$id');
@@ -47,6 +52,7 @@ class TodoService {
     }
   }
 
+  @override
   Future<void> toggleIsChecked(
       {required String id, required bool isChecked}) async {
     try {

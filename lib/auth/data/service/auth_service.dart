@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_todos_app/auth/domain/service/abstract_auth_service.dart';
 import 'package:flutter_todos_app/network/api/api_constants.dart';
 
-class AuthService {
+class AuthService extends AbstractAuthService {
   final Dio _dio;
 
   AuthService(this._dio);
 
+  @override
   Future<bool> login(String username, String password) async {
     try {
       // Make API request to login endpoint
