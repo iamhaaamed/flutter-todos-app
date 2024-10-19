@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:flutter_todos_app/cubit/auth/auth_cubit.dart';
-import 'package:flutter_todos_app/cubit/auth/auth_state.dart';
-import 'package:flutter_todos_app/cubit/todo/todo_cubit.dart';
+import 'package:flutter_todos_app/auth/data/service/shared_preferences_service.dart';
+import 'package:flutter_todos_app/auth/presentation/cubit/auth_cubit.dart';
+import 'package:flutter_todos_app/auth/presentation/cubit/auth_state.dart';
+import 'package:flutter_todos_app/auth/presentation/view/login_page.dart';
+import 'package:flutter_todos_app/auth/presentation/view/onboarding_page.dart';
 import 'package:flutter_todos_app/di/injection_container.dart';
 import 'package:flutter_todos_app/di/injection_container.dart' as di;
-import 'package:flutter_todos_app/screens/home_page.dart';
-import 'package:flutter_todos_app/screens/login_page.dart';
-import 'package:flutter_todos_app/screens/onboarding_page.dart';
-import 'package:flutter_todos_app/screens/profile_page.dart';
-import 'package:flutter_todos_app/screens/todo_details_page.dart';
-import 'package:flutter_todos_app/services/shared_preferences_service.dart';
+import 'package:flutter_todos_app/profile/presentation/view/profile_page.dart';
+import 'package:flutter_todos_app/todo/presentation/cubit/todo_cubit.dart';
+import 'package:flutter_todos_app/todo/presentation/view/home_page.dart';
+import 'package:flutter_todos_app/todo/presentation/view/todo_details_page.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

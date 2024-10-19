@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_todos_app/models/todo.dart';
+import 'package:flutter_todos_app/todo/domain/model/todo.dart';
 import 'package:flutter_todos_app/network/api/api_constants.dart';
 
 class TodoService {

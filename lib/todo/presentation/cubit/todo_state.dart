@@ -1,4 +1,4 @@
-import 'package:flutter_todos_app/models/todo.dart';
+import 'package:flutter_todos_app/todo/domain/model/todo.dart';
 
 sealed class TodosState {}
 

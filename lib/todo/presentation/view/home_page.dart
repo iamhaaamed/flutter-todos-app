@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todos_app/common/styles/color_palettes.dart';
-import 'package:flutter_todos_app/cubit/todo/todo_cubit.dart';
-import 'package:flutter_todos_app/cubit/todo/todo_state.dart';
+import 'package:flutter_todos_app/todo/presentation/cubit/todo_cubit.dart';
+import 'package:flutter_todos_app/todo/presentation/cubit/todo_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_todos_app/models/todo.dart';
-import 'package:flutter_todos_app/screens/todo_details_page.dart';
+import 'package:flutter_todos_app/todo/domain/model/todo.dart';
+import 'package:flutter_todos_app/todo/presentation/view/todo_details_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home';

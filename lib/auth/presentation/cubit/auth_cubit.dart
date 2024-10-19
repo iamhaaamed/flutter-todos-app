@@ -1,7 +1,7 @@
 // AuthCubit handles the authentication logic
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_todos_app/cubit/auth/auth_state.dart';
-import 'package:flutter_todos_app/services/auth_service.dart';
+import 'package:flutter_todos_app/auth/presentation/cubit/auth_state.dart';
+import 'package:flutter_todos_app/auth/data/service/auth_service.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final AuthService _authService;

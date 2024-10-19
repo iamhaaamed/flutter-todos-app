@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_todos_app/cubit/todo/todo_state.dart';
-import 'package:flutter_todos_app/models/todo.dart';
-import 'package:flutter_todos_app/services/todo_service.dart';
+import 'package:flutter_todos_app/todo/presentation/cubit/todo_state.dart';
+import 'package:flutter_todos_app/todo/domain/model/todo.dart';
+import 'package:flutter_todos_app/todo/data/service/todo_service.dart';
 
 class TodosCubit extends Cubit<TodosState> {
   final TodoService service;

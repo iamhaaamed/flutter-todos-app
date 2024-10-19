@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todos_app/auth/presentation/cubit/auth_cubit.dart';
+import 'package:flutter_todos_app/auth/presentation/cubit/auth_state.dart';
 import 'package:flutter_todos_app/constants/app_sizes.dart';
-import 'package:flutter_todos_app/cubit/auth/auth_cubit.dart';
-import 'package:flutter_todos_app/cubit/auth/auth_state.dart';
-import 'package:flutter_todos_app/screens/home_page.dart';
+import 'package:flutter_todos_app/todo/presentation/view/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   static const routeName = '/login';

@@ -1,9 +1,9 @@
-import 'package:flutter_todos_app/cubit/auth/auth_cubit.dart';
-import 'package:flutter_todos_app/cubit/todo/todo_cubit.dart';
+import 'package:flutter_todos_app/auth/data/service/auth_service.dart';
+import 'package:flutter_todos_app/auth/data/service/shared_preferences_service.dart';
+import 'package:flutter_todos_app/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter_todos_app/network/api/dio_client.dart';
-import 'package:flutter_todos_app/services/auth_service.dart';
-import 'package:flutter_todos_app/services/shared_preferences_service.dart';
-import 'package:flutter_todos_app/services/todo_service.dart';
+import 'package:flutter_todos_app/todo/data/service/todo_service.dart';
+import 'package:flutter_todos_app/todo/presentation/cubit/todo_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

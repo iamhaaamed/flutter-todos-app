@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todos_app/common/styles/color_palettes.dart';
 import 'package:flutter_todos_app/constants/app_sizes.dart';
 import 'package:flutter_todos_app/di/injection_container.dart';
-import 'package:flutter_todos_app/screens/login_page.dart';
-import 'package:flutter_todos_app/services/shared_preferences_service.dart';
+import 'package:flutter_todos_app/auth/presentation/view/login_page.dart';
+import 'package:flutter_todos_app/auth/data/service/shared_preferences_service.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingPage extends StatefulWidget {
