@@ -39,7 +39,7 @@ class TodoService {
     }
   }
 
-  Future<void> deleteTodo(int id) async {
+  Future<void> deleteTodo(String id) async {
     try {
       await _dio.delete('${ApiConstants.baseUrlDebug}/todos/$id');
     } catch (e) {
@@ -48,7 +48,7 @@ class TodoService {
   }
 
   Future<void> toggleIsChecked(
-      {required int id, required bool isChecked}) async {
+      {required String id, required bool isChecked}) async {
     try {
       await _dio.patch(
         '${ApiConstants.baseUrlDebug}/todos/$id',

@@ -34,7 +34,7 @@ class TodosCubit extends Cubit<TodosState> {
   }
 
   Future<void> deleteTodo({
-    required int id,
+    required String id,
   }) async {
     try {
       emit(DeleteTodoLoading());
@@ -49,7 +49,7 @@ class TodosCubit extends Cubit<TodosState> {
   }
 
   Future<void> toggleTodo({
-    required int id,
+    required String id,
     required bool isChecked,
   }) async {
     try {

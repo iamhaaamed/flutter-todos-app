@@ -21,19 +21,19 @@
   ],
   "todos": [
     {
-      "id": 1,
+      "id": "1",
       "title": "title1",
       "description": "description1",
-      "isChecked": true
+      "isChecked": false
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "title2",
       "description": "description2",
       "isChecked": true
     },
     {
-      "id": 3,
+      "id": "0",
       "title": "title3",
       "description": "description3",
       "isChecked": true

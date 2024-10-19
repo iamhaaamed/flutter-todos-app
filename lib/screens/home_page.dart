@@ -164,7 +164,7 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               final todo = Todo(
-                id: 0,
+                id: '0',
                 title: _titleController.text,
                 description: _descriptionController.text,
                 isChecked: _isChecked,
