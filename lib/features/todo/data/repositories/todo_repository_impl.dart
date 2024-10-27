@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_todos_app/common/constants/pagination_constants.dart';
 import 'package:flutter_todos_app/features/todo/domain/entities/todo.dart';
 import 'package:flutter_todos_app/features/todo/domain/repositories/todo_repository.dart';
 import 'package:flutter_todos_app/common/constants/api_constants.dart';
@@ -9,12 +10,28 @@ class TodoRepositoryImpl extends TodoRepository {
   TodoRepositoryImpl(this._dio);
 
   @override
-  Future<List<Todo>> getTodos() async {
+  Future<Map<String, dynamic>> getTodos(
+      {int page = 1, int limit = PaginationConstants.itemsPerPage}) async {
     try {
-      final response = await _dio.get('${ApiConstants.baseUrlDebug}/todos');
-      final List<dynamic> data = response.data;
+      final response = await _dio.get(
+        '${ApiConstants.baseUrlDebug}/todos',
+        queryParameters: {
+          '_page': page,
+          '_per_page': limit,
+        },
+      );
 
-      return data.map((json) => Todo.fromJson(json)).toList();
+      final List<dynamic> data = response.data['data'];
+      final todos = data.map((json) => Todo.fromJson(json)).toList();
+
+      // Returning both todos and pagination metadata
+      return {
+        'todos': todos,
+        'pagination': {
+          'next': response.data['next'],
+          'pages': response.data['pages'],
+        }
+      };
     } catch (e) {
       throw Exception('Failed to load todos $e');
     }

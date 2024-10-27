@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_todos_app/common/constants/pagination_constants.dart';
 import 'package:flutter_todos_app/common/model/delayed_result.dart';
 import 'package:flutter_todos_app/features/todo/data/repositories/todo_repository_impl.dart';
 import 'package:flutter_todos_app/features/todo/domain/entities/todo.dart';
@@ -6,15 +7,38 @@ import 'package:flutter_todos_app/features/todo/presentation/cubit/todo_state.da
 
 class TodosCubit extends Cubit<TodosState> {
   final TodoRepositoryImpl repository;
+  int _currentPage = 1;
+  final int _limit = PaginationConstants.itemsPerPage;
+  bool _hasMore = true;
 
   TodosCubit(this.repository) : super(const TodosState());
 
-  Future<void> fetchTodos({String? term}) async {
+  Future<void> fetchTodos({bool isNextPage = false}) async {
+    if (state.loadingResult.isInProgress || (!_hasMore && isNextPage)) return;
+
     try {
       emit(state.copyWith(loadingResult: const DelayedResult.inProgress()));
-      List<Todo> todos = await repository.getTodos();
-      emit(state.copyWith(items: todos));
-      emit(state.copyWith(loadingResult: const DelayedResult.idle()));
+
+      if (!isNextPage) {
+        _currentPage = 1; // Reset page if not loading the next page
+        _hasMore = true; // Reset _hasMore when starting a new fetch
+      }
+
+      final response =
+          await repository.getTodos(page: _currentPage, limit: _limit);
+
+      final todos = response['todos'] as List<Todo>;
+      final pagination = response['pagination'] as Map<String, dynamic>;
+
+      // Determine if more items are available
+      _hasMore = pagination['next'] != null;
+      if (_hasMore) {
+        _currentPage++;
+      }
+
+      final newItems = isNextPage ? [...state.items, ...todos] : todos;
+      emit(state.copyWith(
+          items: newItems, loadingResult: const DelayedResult.idle()));
     } on Exception catch (ex) {
       emit(state.copyWith(loadingResult: DelayedResult.fromError(ex)));
     }

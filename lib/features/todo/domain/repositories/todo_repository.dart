@@ -1,7 +1,7 @@
 import 'package:flutter_todos_app/features/todo/domain/entities/todo.dart';
 
 abstract class TodoRepository {
-  Future<List<Todo>> getTodos();
+  Future<Map<String, dynamic>> getTodos();
   Future<Todo> addTodo(Todo todo);
   Future<void> updateTodo(Todo todo);
   Future<void> deleteTodo(String id);
