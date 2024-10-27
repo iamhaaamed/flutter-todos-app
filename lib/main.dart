@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:flutter_todos_app/cubit/auth/auth_cubit.dart';
-import 'package:flutter_todos_app/cubit/auth/auth_state.dart';
-import 'package:flutter_todos_app/cubit/todo/todo_cubit.dart';
-import 'package:flutter_todos_app/di/injection_container.dart';
-import 'package:flutter_todos_app/di/injection_container.dart' as di;
-import 'package:flutter_todos_app/screens/home_page.dart';
-import 'package:flutter_todos_app/screens/login_page.dart';
-import 'package:flutter_todos_app/screens/onboarding_page.dart';
-import 'package:flutter_todos_app/screens/profile_page.dart';
-import 'package:flutter_todos_app/screens/todo_details_page.dart';
-import 'package:flutter_todos_app/services/shared_preferences_service.dart';
+import 'package:flutter_todos_app/features/auth/data/repositories/shared_preferences_repository_impl.dart';
+import 'package:flutter_todos_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:flutter_todos_app/features/auth/presentation/cubit/auth_state.dart';
+import 'package:flutter_todos_app/features/auth/presentation/pages/login_page.dart';
+import 'package:flutter_todos_app/features/auth/presentation/pages/onboarding_page.dart';
+import 'package:flutter_todos_app/common/di/injection_container.dart';
+import 'package:flutter_todos_app/common/di/injection_container.dart' as di;
+import 'package:flutter_todos_app/features/profile/presentation/pages/profile_page.dart';
+import 'package:flutter_todos_app/features/todo/presentation/cubit/todo_cubit.dart';
+import 'package:flutter_todos_app/features/todo/presentation/pages/home_page.dart';
+import 'package:flutter_todos_app/features/todo/presentation/pages/todo_details_page.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  await di.init('http://localhost:3000/');
+  await di.init();
 
   // Retrieve SharedPreferencesService to check if onboarding has been viewed
-  final sharedPreferencesService = getIt<SharedPreferencesService>();
-  final onboardingViewed = await sharedPreferencesService.isOnboardingViewed();
+  final sharedPreferencesRepository = getIt<SharedPreferencesRepositoryImpl>();
+  final onboardingViewed =
+      await sharedPreferencesRepository.isOnboardingViewed();
 
   runApp(MyApp(onboardingViewed: onboardingViewed));
 
